@@ -8,6 +8,7 @@ class ArticleController {
     var decoded = jwt.verify(req.headers.token, process.env.JWT_SECRET_KEY)
     // console.log('asdfasdfasdfcweqf', decoded);
     Article.create({
+      imageUrl: req.body.imageUrl,
       title: req.body.title,
       content: req.body.content,
       writter: decoded.id
@@ -42,7 +43,7 @@ class ArticleController {
   static deleteArticle(req, res){
     Article.deleteOne({ _id: req.params.id })
     .then(result=>{
-      console.log(result.n);
+      // console.log(result.n);
       if (result.n === 0) {
         res.status(404).json({message: 'article not found'})
       }
@@ -75,10 +76,10 @@ class ArticleController {
       userId: decoded.id
     })
     .then(comment=>{
-      console.log(comment);
+      // console.log(comment);
       Article.findOneAndUpdate({ _id: req.params.id }, {$push: {comment: comment}})
       .then(result=>{
-        console.log(result);
+        // console.log(result);
         res.status(200).json({message: 'comment successfully added!', data: result})
       })
       .catch(err=>{

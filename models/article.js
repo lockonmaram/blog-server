@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var articleSchema = new Schema({
+  imageUrl: {
+    type: String,
+    required: [true, 'url is required']
+  },
   title: {
     type: String,
     require: true

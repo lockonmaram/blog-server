@@ -30,6 +30,7 @@ describe('Article', function(){
     .post('/articles')
     .set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjViN2Q1ODllNWZiMzE3NDFmOGNlYjY3MiIsImZpcnN0X25hbWUiOiJtYXJhbSIsImxhc3RfbmFtZSI6InN0cmF0b3MiLCJlbWFpbCI6Im1hcmFtc3RyYXRvc0BnbWFpbC5jb20iLCJpYXQiOjE1MzQ5NDQwMzd9.0ShZWavEtPDjoLJenwiMmOarxX2nr0cDF2ZOW6wGgrY')
     .send({
+      imageUrl: 'https://storage.googleapis.com/blog.lockonmaram.com/1534951997024catdog.jpg',
       title: 'test title',
       content: 'this is a psa this is only a test'
     })
@@ -38,6 +39,7 @@ describe('Article', function(){
       testArticleId = res.body.data._id
       // console.log(testArticleId);
       res.body.should.be.a('object')
+      res.body.data.should.have.property('imageUrl')
       res.body.data.should.have.property('title')
       res.body.data.should.have.property('content')
       res.body.data.should.have.property('writter')
@@ -81,6 +83,7 @@ describe('Article', function(){
       // console.log('signup',res.body);
       res.body.should.be.a('object')
       res.body.data.should.be.a('object')
+      res.body.data.should.have.property('imageUrl')
       res.body.data.should.have.property('title')
       res.body.data.should.have.property('content')
       res.body.data.should.have.property('writter')
