@@ -8,11 +8,12 @@ chai.should();
 chai.use(chaiHttp);
 
 let url = 'http://localhost:3000'
+// let url = 'https://blogserver.lockonmaram.com'
 
 describe('User', function(){
   before((done) => {
     this.timeout(5000)
-    mongoose.connect(process.env.MONGO_URI_TEST, { useNewUrlParser: true })
+    mongoose.connect(process.env.MONGO_URI_DEVELOPMENT, { useNewUrlParser: true })
     .then (function () {
       User.deleteMany({ last_name: 'test'})
       .then ( function (result) {
