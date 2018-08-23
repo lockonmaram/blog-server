@@ -23,6 +23,18 @@ class ArticleController {
   static getArticles(req, res){
     Article.find({})
     .populate('comment')
+    .populate('writter')
+    .then(articles=>{
+      res.status(200).json({message: 'articles successfully retrieved', data: articles})
+    })
+    .catch(err=>{
+      res.status(400).json({message: 'something went wrong!', err})
+    })
+  }
+  static getArticlesByUser(req, res){
+    Article.find({ writter: req.params.userId })
+    .populate('comment')
+    .populate('writter')
     .then(articles=>{
       res.status(200).json({message: 'articles successfully retrieved', data: articles})
     })
@@ -33,6 +45,7 @@ class ArticleController {
   static getOneArticle(req, res){
     Article.findOne({ _id: req.params.id })
     .populate('comment')
+    .populate('writter')
     .then(article=>{
       res.status(200).json({message: 'article successfully retrieved', data: article})
     })

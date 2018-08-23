@@ -8,6 +8,7 @@ const images = require('../helpers/images')
 
 /* GET articles listing. */
 router.get('/', ArticleController.getArticles)
+router.get('/user/:userId', ArticleController.getArticles)
 router.post('/', IsLoggedIn.loginCheck, ArticleController.addArticle)
 router.get('/:id', ArticleController.getOneArticle)
 router.delete('/:id', IsLoggedIn.loginCheck, WritterCheck.writterCheck, ArticleController.deleteArticle)

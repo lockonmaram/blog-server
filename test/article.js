@@ -58,6 +58,17 @@ describe('Article', function(){
       done()
     })
   })
+  it('should show ALL articles by a user on /articles/user/:userId GET', function(done){
+    chai.request(url)
+    .get(`/articles/user/5b7d589e5fb31741f8ceb672`)
+    .end(function(err, res){
+      // console.log('signup',res.body);
+      res.body.should.be.a('object')
+      res.body.data.should.be.a('array')
+      res.should.have.status(200)
+      done()
+    })
+  })
   it('should update a SINGLE article on /articles/:id PUT', function(done){
     chai.request(url)
     .put(`/articles/${testArticleId}`)
