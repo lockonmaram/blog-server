@@ -13,7 +13,7 @@ let url = 'http://localhost:3000'
 describe('Article', function(){
   before((done) => {
     this.timeout(5000)
-    mongoose.connect(process.env.MONGO_URI_DEVELOPMENT, { useNewUrlParser: true })
+    mongoose.connect(process.env.MONGO_URI_TEST, { useNewUrlParser: true })
     .then (function () {
       Article.deleteMany({ title: 'test title'})
       .then ( function (result) {

@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken')
 const Article = require('../models/article')
-require('dotenv').config()
 
 class Writter {
   static writterCheck (req, res, next){
