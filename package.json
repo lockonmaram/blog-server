@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "test": "NODE_ENV=test nodemon ./bin/www",
-    "eueu": "nyc mocha --timeout 10000"
+    "nyc": "nyc mocha --timeout 10000"
   },
   "dependencies": {
     "@google-cloud/storage": "^1.7.0",
