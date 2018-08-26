@@ -2,6 +2,7 @@ const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 var FB = require('fb')
+const nodeMailer = require('nodemailer')
 
 class UserController {
   static registerUser(req, res){
@@ -18,6 +19,33 @@ class UserController {
       password: hashedPassword
     })
     .then(user=>{
+      let transporter = nodeMailer.createTransport({
+        host:'smtp.gmail.com',
+        port:465,
+        secure:true,
+        auth:{
+          user:'treasurecredit@gmail.com',
+          pass:'pairproject'
+        }
+      })
+      // console.log(transporter);
+      let mailOptions = {
+        from:'"Maram Blog"<treasurecredit@gmail.com>',
+        to: user.email,
+        subject: 'Register successful!',
+        html: `<b> Thank you ${user.first_name},<br>
+                   for joining Maram Blog!<br><br>
+                   Now you can post and comment!
+              </b>`
+      };
+      // console.log(mailOptions);
+      transporter.sendMail(mailOptions,function(error,info){
+        if(error){
+          res.status(400).json(error)
+        }
+        // res.alert('account registration confirmation has been sent via email!')
+        console.log('Message %s sent: %s',info.messageId,info.response);
+      })
       res.status(200).json({message: 'user successfully registered!', data: user})
     })
     .catch(err=>{
