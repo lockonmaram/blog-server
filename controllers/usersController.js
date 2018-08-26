@@ -29,6 +29,7 @@ class UserController {
         }
       })
       // console.log(transporter);
+      // console.log(user.email);
       let mailOptions = {
         from:'"Maram Blog"<treasurecredit@gmail.com>',
         to: user.email,
@@ -44,9 +45,9 @@ class UserController {
           res.status(400).json(error)
         }
         // res.alert('account registration confirmation has been sent via email!')
-        console.log('Message %s sent: %s',info.messageId,info.response);
+        // console.log('Message %s sent: %s',info.messageId,info.response);
+        res.status(200).json({message: 'user successfully registered!', data: user})
       })
-      res.status(200).json({message: 'user successfully registered!', data: user})
     })
     .catch(err=>{
       res.status(400).json({message: 'something went wrong!', err})
