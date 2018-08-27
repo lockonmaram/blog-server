@@ -125,7 +125,7 @@ class UserController {
           email: user.email
         }, process.env.JWT_SECRET_KEY)
         // console.log(tokenUser);
-        res.status(200).json({message: 'login successful!', token: tokenUser})
+        res.status(200).json({message: 'login successful!', token: tokenUser, id: user._id})
         // req.headers.token = tokenUser
       }else {
         res.status(400).json({message: 'wrong password'})
