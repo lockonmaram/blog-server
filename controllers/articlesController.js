@@ -44,7 +44,10 @@ class ArticleController {
   }
   static getOneArticle(req, res){
     Article.findOne({ _id: req.params.id })
-    .populate('comment')
+    .populate({
+      path: 'comment',
+      populate: { path: 'userId' }
+    })
     .populate('writter')
     .then(article=>{
       res.status(200).json({message: 'article successfully retrieved', data: article})
@@ -101,6 +104,19 @@ class ArticleController {
     })
     .catch(err=>{
       res.status(400).json({message:'something went wrong!', err})
+    })
+  }
+  static deleteComment(req, res){
+    Comment.deleteOne({ _id: req.params.commentId })
+    .then(result=>{
+      // console.log(result.n);
+      if (result.n === 0) {
+        res.status(404).json({message: 'comment not found'})
+      }
+      res.status(200).json({message: 'comment successfully deleted', result})
+    })
+    .catch(err=>{
+      res.status(400).json({message: 'something went wrong!', err})
     })
   }
 }
